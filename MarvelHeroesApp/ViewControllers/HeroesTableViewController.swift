@@ -7,45 +7,41 @@
 
 import UIKit
 
-import CryptoKit
-
-let marvelUrl = "https://gateway.marvel.com:443/v1/public/characters?"
-let publicKey = "eade1da8b900e49b57c24a9f20e69e2f"
-let privateKey = "ce9701f28d37990464462fdadf350f994741e442"
-let ts = NSDate().timeIntervalSince1970.description
-let hash = "\(ts)\(privateKey)\(publicKey)".MD5
-
-let url = "\(marvelUrl)ts=\(ts)&apikey=\(publicKey)&hash=\(hash)"
-
-
 class HeroesTableViewController: UITableViewController {
+    
+    var heroesArray = [Character]()
     
     private var marvel: Marvel?
     private var fetchingMore = false
     
-    var heroesArray = [Character]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = 100
         fetchData()
     }
     
     // MARK: - Table view data source
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //marvel?.data?.results?.count ?? 0
         heroesArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Hero", for: indexPath)
         
         let hero = heroesArray[indexPath.row]
         
-        //let hero = marvel?.data?.results?[indexPath.row]
-        cell.configure(with: hero)
+        var content = cell.defaultContentConfiguration()
+        content.text = hero.name
+        content.image = UIImage(data: <#T##Data#>)
+        content.imageProperties.cornerRadius = tableView.rowHeight / 2
+        
+        cell.contentConfiguration = content
+        
         return cell
     }
+    
+    // MARK: - Table view delegate
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
@@ -117,16 +113,6 @@ class HeroesTableViewController: UITableViewController {
         }
     }
     
-}
-
-extension String {
-    var MD5: String {
-        return Insecure
-            .MD5
-            .hash(data: self.data(using: .utf8) ?? Data())
-            .map { String(format: "%02hhx", $0) }
-            .joined()
-    }
 }
 
 
