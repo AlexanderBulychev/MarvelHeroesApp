@@ -26,7 +26,11 @@ class DescriptionViewController: UIViewController {
     
     private func setupUI() {
         title = hero.name
+        if hero.description != "" {
         heroDescriptionLabel.text = hero.description
+        } else {
+            heroDescriptionLabel.text = "Sorry, but we don't have information about this hero"
+        }
         
         let imageURL = "\(hero.thumbnail?.path ?? "").\(hero.thumbnail?.format ?? "")"
         NetworkManager.shared.fetchImage(from: imageURL) { result in

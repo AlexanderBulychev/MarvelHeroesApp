@@ -12,15 +12,26 @@ class HeroesTableViewController: UITableViewController {
     private var marvel: Marvel?
     private var heroesArray = [Character]()
     
-    // MARK: - Ancillary values
+    // MARK: - Ancillary properties
     private var offset = 0
     private var limit = 0
     private var fetchingMore = false
-    // private var offsetModel: OffsetModel?
+
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var filteredHeroes = [Character]()
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 100
+        
+        setupSearchController()
         fetchData()
     }
     
@@ -62,12 +73,19 @@ class HeroesTableViewController: UITableViewController {
             }
         }
     }
-        
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Find your favorite hero"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
 }
 
+// MARK: - Fetching More Data from Network
 extension HeroesTableViewController {
-    
-    //MARK: - Fetching More Data from Network
     private func getOffset() -> Int {
         offset += limit
         return offset
@@ -102,6 +120,20 @@ extension HeroesTableViewController {
         if offsetY > contentHeight - scrollView.frame.height * 2 {
             fetchMoreHeroes()
         }
+    }
+}
+
+// MARK: - UISearchResultUpdating Delegate
+extension HeroesTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+    
+    private func filterContentForSearchText(_ searchText: String) {
+        filteredHeroes = heroesArray.filter { hero in
+            hero.name?.lowercased().contains(searchText.lowercased()) ?? false
+        }
+        tableView.reloadData()
     }
 }
 
