@@ -37,12 +37,12 @@ class HeroesTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        heroesArray.count
+        isFiltering ? filteredHeroes.count : heroesArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Hero", for: indexPath) as! TableViewCell
-        let hero = heroesArray[indexPath.row]
+        let hero = isFiltering ? filteredHeroes[indexPath.row] : heroesArray[indexPath.row]
         cell.configure(with: hero)
         return cell
     }
@@ -50,10 +50,10 @@ class HeroesTableViewController: UITableViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        let hero = isFiltering ? filteredHeroes[indexPath.row] : heroesArray[indexPath.row]
         guard let descriptionVC = segue.destination as? DescriptionViewController else { return }
-        descriptionVC.hero = heroesArray[indexPath.row]
+        descriptionVC.hero = hero
     }
-    
     
     // MARK: - Fetching Data from Network
     private func fetchData() {
