@@ -21,7 +21,7 @@ struct Marvel: Decodable {
 struct DataContainer: Decodable {
     let offset: Int?
     let limit: Int?
-    let total: Int?
+//    let total: Int?
 //    let count: Int?
     let results: [Character]?
 }

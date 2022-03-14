@@ -8,13 +8,22 @@
 import Foundation
 import CryptoKit
 
-let marvelUrl = "https://gateway.marvel.com:443/v1/public/characters?"
-let publicKey = "eade1da8b900e49b57c24a9f20e69e2f"
-let privateKey = "ce9701f28d37990464462fdadf350f994741e442"
-let ts = NSDate().timeIntervalSince1970.description
-let hash = "\(ts)\(privateKey)\(publicKey)".MD5
-
-let url = "\(marvelUrl)ts=\(ts)&apikey=\(publicKey)&hash=\(hash)"
+class MarvelApi {
+    static let shared = MarvelApi()
+    var url: String {
+        "\(marvelUrl)ts=\(ts)&apikey=\(publicKey)&hash=\(hash)"
+    }
+    
+    private let marvelUrl = "https://gateway.marvel.com:443/v1/public/characters?"
+    private let publicKey = "eade1da8b900e49b57c24a9f20e69e2f"
+    private let privateKey = "ce9701f28d37990464462fdadf350f994741e442"
+    private let ts = NSDate().timeIntervalSince1970.description
+    private var hash: String {
+    (ts + privateKey + publicKey).MD5
+    }
+        
+    init() {}
+}
 
 extension String {
     var MD5: String {
@@ -25,3 +34,4 @@ extension String {
             .joined()
     }
 }
+

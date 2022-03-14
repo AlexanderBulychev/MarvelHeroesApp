@@ -12,14 +12,19 @@ class DescriptionViewController: UIViewController {
     @IBOutlet weak var heroDescriptionLabel: UILabel!
     @IBOutlet weak var heroImageView: UIImageView! {
         didSet {
+            heroImageView.contentMode = .scaleAspectFill
             heroImageView.layer.cornerRadius = 15
+            }
         }
-    }
-    
+
     var hero: Character!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+    }
+    
+    private func setupUI() {
         title = hero.name
         heroDescriptionLabel.text = hero.description
         
@@ -33,8 +38,6 @@ class DescriptionViewController: UIViewController {
                 
             }
         }
-        
-        
     }
     
 }

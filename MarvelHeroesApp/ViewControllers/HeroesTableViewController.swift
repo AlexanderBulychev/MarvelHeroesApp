@@ -9,11 +9,14 @@ import UIKit
 
 class HeroesTableViewController: UITableViewController {
     
-    var heroesArray = [Character]()
-    
     private var marvel: Marvel?
-    private var fetchingMore = false
+    private var heroesArray = [Character]()
     
+    // MARK: - Ancillary values
+    private var offset = 0
+    private var limit = 0
+    private var fetchingMore = false
+    // private var offsetModel: OffsetModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,111 +30,78 @@ class HeroesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Hero", for: indexPath)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Hero", for: indexPath) as! TableViewCell
         let hero = heroesArray[indexPath.row]
-        
-        var content = cell.defaultContentConfiguration()
-        content.text = hero.name
-        content.image = UIImage(data: <#T##Data#>)
-        content.imageProperties.cornerRadius = tableView.rowHeight / 2
-        
-        cell.contentConfiguration = content
-        
+        cell.configure(with: hero)
         return cell
     }
     
-    // MARK: - Table view delegate
-    
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
-//        let hero = marvel?.data?.results?[indexPath.row]
-        
         guard let descriptionVC = segue.destination as? DescriptionViewController else { return }
         descriptionVC.hero = heroesArray[indexPath.row]
-        
     }
     
     
     // MARK: - Fetching Data from Network
     private func fetchData() {
-        NetworkManager.shared.fetchDataWithResult(from: url) { [weak self] result in
+        NetworkManager.shared.fetchDataWithResult(from: MarvelApi.shared.url) { [weak self] result in
             switch result {
             case .success(let marvel):
-//                self?.marvel = marvel
-                
                 guard let heroes = marvel.data?.results else {
                     return
                 }
-                
+                self?.marvel = marvel
+                self?.offset = marvel.data?.offset ?? 0
+                self?.limit = marvel.data?.limit ?? 0
                 self?.heroesArray.append(contentsOf: heroes)
                 self?.tableView.reloadData()
-                //self?.getOffsetFrom(marvel)
             case .failure(let error):
                 print(error)
             }
         }
     }
+        
+}
+
+extension HeroesTableViewController {
     
-    @discardableResult
-    private func getOffsetFrom(_ model: Marvel?) -> Int {
-        
-        guard
-            var offset = model?.data?.offset,
-            let limit = model?.data?.limit,
-            let total = model?.data?.total
-        else { return 0 }
-        
+    //MARK: - Fetching More Data from Network
+    private func getOffset() -> Int {
         offset += limit
-        return total - offset > limit ? offset : (total - offset)
+        return offset
     }
     
-    
-    private func fetchMoreHeroes(completion: @escaping (Error?) -> Void) {
+    private func fetchMoreHeroes() {
         if fetchingMore == false {
             fetchingMore = true
             
-            let urlForNextHeroes = url + "&offset=" + String(getOffsetFrom(marvel))
+            let urlForNextHeroes = MarvelApi.shared.url + "&offset=" + String(getOffset())
             NetworkManager.shared.fetchDataWithResult(from: urlForNextHeroes) { [weak self] result in
                 switch result {
                 case .success(let marvel):
-                    
-                    guard let heroes = marvel.data?.results else {
-                        return
-                    }
-                    
+                    guard let heroes = marvel.data?.results,
+                          let offset = marvel.data?.offset
+                    else { return }
                     self?.heroesArray.append(contentsOf: heroes)
-                    
-//                    self?.marvel = marvel
+                    self?.offset = offset
                     self?.tableView.reloadData()
                     self?.fetchingMore = false
-                    completion(nil)
                 case .failure(let error):
-                    completion(error)
+                    print(error)
                 }
             }
         }
     }
     
-}
-
-
-// MARK: - UIScrollViewDelegate
-extension HeroesTableViewController {
+    // MARK: - UIScrollViewDelegate
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         if offsetY > contentHeight - scrollView.frame.height * 2 {
-            
-            fetchMoreHeroes { error in
-                guard let error = error else {
-                    self.tableView.reloadData()
-                    return
-                }
-                print(error.localizedDescription)
-            }
+            fetchMoreHeroes()
         }
     }
 }
-
 

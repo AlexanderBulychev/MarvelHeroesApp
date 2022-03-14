@@ -32,9 +32,6 @@ class NetworkManager {
                 }
                 do {
                     let marvel = try JSONDecoder().decode(Marvel.self, from: data)
-                    if marvel == nil {
-                        print(String(decoding: data, as: UTF8.self))
-                    }
                     DispatchQueue.main.async {
                         completion(.success(marvel))
                     }
