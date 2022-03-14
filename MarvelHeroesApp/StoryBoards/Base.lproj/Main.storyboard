@@ -87,18 +87,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="5l6-Tu-Hjk">
-                                <rect key="frame" x="20" y="587.5" width="374" height="308.5"/>
+                                <rect key="frame" x="0.0" y="587.5" width="414" height="308.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Series" id="BP4-nj-E8H">
-                                        <rect key="frame" x="0.0" y="44.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BP4-nj-E8H" id="lVx-Qo-3BS">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="kCw-Dg-ArY" id="zg6-x9-mK0"/>
+                                    <outlet property="delegate" destination="kCw-Dg-ArY" id="X5a-Xl-OKz"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JbN-NQ-NCq"/>
@@ -111,8 +115,8 @@
                             <constraint firstItem="5l6-Tu-Hjk" firstAttribute="top" secondItem="SxN-vW-3tt" secondAttribute="bottom" constant="16" id="I1b-52-y0a"/>
                             <constraint firstItem="SxN-vW-3tt" firstAttribute="width" secondItem="geB-d9-gNE" secondAttribute="width" id="I9I-sq-9WC"/>
                             <constraint firstItem="geB-d9-gNE" firstAttribute="width" secondItem="zQl-hp-3VW" secondAttribute="width" multiplier="0.903382" id="KPY-gM-ASa"/>
-                            <constraint firstItem="5l6-Tu-Hjk" firstAttribute="leading" secondItem="JbN-NQ-NCq" secondAttribute="leading" constant="20" id="QPr-oJ-PZ9"/>
-                            <constraint firstItem="JbN-NQ-NCq" firstAttribute="trailing" secondItem="5l6-Tu-Hjk" secondAttribute="trailing" constant="20" id="Rob-hz-p7y"/>
+                            <constraint firstItem="5l6-Tu-Hjk" firstAttribute="leading" secondItem="JbN-NQ-NCq" secondAttribute="leading" id="QPr-oJ-PZ9"/>
+                            <constraint firstItem="JbN-NQ-NCq" firstAttribute="trailing" secondItem="5l6-Tu-Hjk" secondAttribute="trailing" id="Rob-hz-p7y"/>
                             <constraint firstItem="geB-d9-gNE" firstAttribute="centerX" secondItem="zQl-hp-3VW" secondAttribute="centerX" id="isx-IL-0UA"/>
                         </constraints>
                     </view>
@@ -120,6 +124,7 @@
                     <connections>
                         <outlet property="heroDescriptionLabel" destination="SxN-vW-3tt" id="Z9z-zB-5UR"/>
                         <outlet property="heroImageView" destination="geB-d9-gNE" id="EVR-Wc-YvY"/>
+                        <outlet property="heroSeries" destination="5l6-Tu-Hjk" id="x7l-vb-TNB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dXT-L0-4VV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

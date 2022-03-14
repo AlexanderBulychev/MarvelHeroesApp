@@ -16,7 +16,8 @@ class DescriptionViewController: UIViewController {
             heroImageView.layer.cornerRadius = 15
             }
         }
-
+    @IBOutlet weak var heroSeries: UITableView!
+    
     var hero: Character!
     
     override func viewDidLoad() {
@@ -43,5 +44,23 @@ class DescriptionViewController: UIViewController {
             }
         }
     }
-    
 }
+
+// MARK: - TableView Data Source
+extension DescriptionViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        hero.series?.items?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Series", for: indexPath)
+        var content = cell.defaultContentConfiguration()
+        if let seriesName = hero.series?.items?[indexPath.row].name {
+            content.text = seriesName
+            content.textProperties.font = UIFont.systemFont(ofSize: 18, weight: .light)
+        }
+        cell.contentConfiguration = content
+        return cell
+    }
+}
+
