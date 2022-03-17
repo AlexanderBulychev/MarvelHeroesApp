@@ -12,11 +12,12 @@ class HeroesTableViewController: UITableViewController {
     private var marvel: Marvel?
     private var heroesArray = [Character]()
     
-    // MARK: - Ancillary properties
+    // MARK: - Ancillary properties for fetching more Heroes
     private var offset = 0
     private var limit = 0
     private var fetchingMore = false
 
+    // MARK: - Ancillary properties for search
     private let searchController = UISearchController(searchResultsController: nil)
     private var filteredHeroes = [Character]()
     private var searchBarIsEmpty: Bool {
@@ -27,11 +28,14 @@ class HeroesTableViewController: UITableViewController {
         return searchController.isActive && !searchBarIsEmpty
     }
     
+    private var spinnerView = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 100
         
         setupSearchController()
+        showSpinner(in: tableView)
         fetchData()
     }
     
@@ -44,6 +48,7 @@ class HeroesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Hero", for: indexPath) as! TableViewCell
         let hero = isFiltering ? filteredHeroes[indexPath.row] : heroesArray[indexPath.row]
         cell.configure(with: hero)
+        spinnerView.stopAnimating()
         return cell
     }
     
@@ -74,6 +79,7 @@ class HeroesTableViewController: UITableViewController {
         }
     }
     
+    // MARK: - Private methods
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -82,6 +88,16 @@ class HeroesTableViewController: UITableViewController {
         definesPresentationContext = true
     }
     
+    private func showSpinner(in view: UITableView) {
+        spinnerView = UIActivityIndicatorView(style: .large)
+        spinnerView.style = .large
+        spinnerView.color = .darkGray
+        spinnerView.startAnimating()
+        spinnerView.center = view.center
+        spinnerView.hidesWhenStopped = true
+        
+        view.addSubview(spinnerView)
+    }
 }
 
 // MARK: - Fetching More Data from Network

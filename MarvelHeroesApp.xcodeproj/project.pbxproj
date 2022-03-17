@@ -70,6 +70,7 @@
 			children = (
 				FCD0E71E27AB7BF9001277A2 /* AppDelegate.swift */,
 				FCD0E72027AB7BF9001277A2 /* SceneDelegate.swift */,
+				FCD0E72C27AB7BFB001277A2 /* Info.plist */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -81,6 +82,14 @@
 				FCD0E72927AB7BFB001277A2 /* LaunchScreen.storyboard */,
 			);
 			path = StoryBoards;
+			sourceTree = "<group>";
+		};
+		FCB0B45527E3102800E9D74F /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				FCD0E72727AB7BFB001277A2 /* Assets.xcassets */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 		FCD0E71227AB7BF9001277A2 = {
@@ -109,8 +118,7 @@
 				FCD0E73727ABD67D001277A2 /* Services */,
 				FC0D967427B0F3E500C8A30E /* SupportingFiles */,
 				FC0D967527B0F41400C8A30E /* StoryBoards */,
-				FCD0E72727AB7BFB001277A2 /* Assets.xcassets */,
-				FCD0E72C27AB7BFB001277A2 /* Info.plist */,
+				FCB0B45527E3102800E9D74F /* Source */,
 			);
 			path = MarvelHeroesApp;
 			sourceTree = "<group>";
@@ -361,7 +369,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TY4Z5A4HHN;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MarvelHeroesApp/Info.plist;
+				INFOPLIST_FILE = MarvelHeroesApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -389,7 +397,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TY4Z5A4HHN;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MarvelHeroesApp/Info.plist;
+				INFOPLIST_FILE = MarvelHeroesApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
