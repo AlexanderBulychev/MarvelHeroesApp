@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class TableViewCell: UITableViewCell {
     
@@ -21,7 +22,6 @@ class TableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
         heroImageView.image = nil
         heroImageView.image = UIImage()
     }
@@ -29,14 +29,8 @@ class TableViewCell: UITableViewCell {
     func configure(with hero: Character) {
         heroName.text = hero.name
         
-        let imageURL = "\(hero.thumbnail?.path ?? "").\(hero.thumbnail?.format ?? "")" 
-        NetworkManager.shared.fetchImage(from: imageURL) { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.heroImageView.image = UIImage(data: data)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+        let imageLink = "\(hero.thumbnail?.path ?? "").\(hero.thumbnail?.format ?? "")"
+        guard let imageURL = URL(string: imageLink) else { return }
+        heroImageView.af.setImage(withURL: imageURL)
     }
 }

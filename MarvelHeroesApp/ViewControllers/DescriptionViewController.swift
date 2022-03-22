@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class DescriptionViewController: UIViewController {
 
@@ -30,19 +31,13 @@ class DescriptionViewController: UIViewController {
         if hero.description != "" {
         heroDescriptionLabel.text = hero.description
         } else {
+            heroDescriptionLabel.textColor = .lightGray
             heroDescriptionLabel.text = "Sorry, but we don't have information about this hero"
         }
         
-        let imageURL = "\(hero.thumbnail?.path ?? "").\(hero.thumbnail?.format ?? "")"
-        NetworkManager.shared.fetchImage(from: imageURL) { result in
-            switch result {
-            case .success(let data):
-                self.heroImageView.image = UIImage(data: data)
-            case .failure(let error):
-                print(error.localizedDescription)
-                
-            }
-        }
+        let imageLink = "\(hero.thumbnail?.path ?? "").\(hero.thumbnail?.format ?? "")"
+        guard let imageURL = URL(string: imageLink) else { return }
+        heroImageView.af.setImage(withURL: imageURL)
     }
 }
 
