@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class HeroesTableViewController: UITableViewController {
     
@@ -33,10 +34,8 @@ class HeroesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 100
-        
         setupSearchController()
         showSpinner(in: tableView)
-        fetchData()
     }
     
     // MARK: - Table view data source
@@ -60,25 +59,6 @@ class HeroesTableViewController: UITableViewController {
         descriptionVC.hero = hero
     }
     
-    // MARK: - Fetching Data from Network
-    private func fetchData() {
-        NetworkManager.shared.fetchDataWithResult(from: MarvelApi.shared.url) { [weak self] result in
-            switch result {
-            case .success(let marvel):
-                guard let heroes = marvel.data?.results else {
-                    return
-                }
-                self?.marvel = marvel
-                self?.offset = marvel.data?.offset ?? 0
-                self?.limit = marvel.data?.limit ?? 0
-                self?.heroesArray.append(contentsOf: heroes)
-                self?.tableView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
     // MARK: - Private methods
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
@@ -100,26 +80,28 @@ class HeroesTableViewController: UITableViewController {
     }
 }
 
-// MARK: - Fetching More Data from Network
+// MARK: - Fetching Data from Network
 extension HeroesTableViewController {
     private func getOffset() -> Int {
         offset += limit
         return offset
     }
     
-    private func fetchMoreHeroes() {
+    private func fetchHeroes() {
         if fetchingMore == false {
             fetchingMore = true
             
             let urlForNextHeroes = MarvelApi.shared.url + "&offset=" + String(getOffset())
-            NetworkManager.shared.fetchDataWithResult(from: urlForNextHeroes) { [weak self] result in
+            NetworkManager.shared.fetchDataWithAlamofire(from: urlForNextHeroes) { [weak self] result in
                 switch result {
                 case .success(let marvel):
                     guard let heroes = marvel.data?.results,
-                          let offset = marvel.data?.offset
+                          let offset = marvel.data?.offset,
+                          let limit = marvel.data?.limit
                     else { return }
                     self?.heroesArray.append(contentsOf: heroes)
                     self?.offset = offset
+                    self?.limit = limit
                     self?.tableView.reloadData()
                     self?.fetchingMore = false
                 case .failure(let error):
@@ -134,7 +116,7 @@ extension HeroesTableViewController {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         if offsetY > contentHeight - scrollView.frame.height * 2 {
-            fetchMoreHeroes()
+            fetchHeroes()
         }
     }
 }
