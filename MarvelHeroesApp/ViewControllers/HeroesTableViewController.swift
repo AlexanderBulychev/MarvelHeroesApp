@@ -36,6 +36,7 @@ class HeroesTableViewController: UITableViewController {
         tableView.rowHeight = 100
         setupSearchController()
         showSpinner(in: tableView)
+        setupRefreshControl()
     }
     
     // MARK: - Table view data source
@@ -82,6 +83,7 @@ class HeroesTableViewController: UITableViewController {
 
 // MARK: - Fetching Data from Network
 extension HeroesTableViewController {
+    
     private func getOffset() -> Int {
         offset += limit
         return offset
@@ -118,6 +120,35 @@ extension HeroesTableViewController {
         if offsetY > contentHeight - scrollView.frame.height * 2 {
             fetchHeroes()
         }
+    }
+    
+    // MARK: - UIRefreshControl
+    @objc private func downloadHeroes() {
+        let urlForNextHeroes = MarvelApi.shared.url + "&offset=" + String(getOffset())
+        NetworkManager.shared.fetchDataWithResult(from: urlForNextHeroes) { [weak self] result in
+            switch result {
+            case .success(let marvel):
+                guard let heroes = marvel.data?.results,
+                      let offset = marvel.data?.offset,
+                      let limit = marvel.data?.limit
+                else { return }
+                self?.heroesArray.append(contentsOf: heroes)
+                self?.offset = offset
+                self?.limit = limit
+                self?.tableView.reloadData()
+                if self?.refreshControl != nil {
+                    self?.refreshControl?.endRefreshing()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func setupRefreshControl() {
+    refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh the list of heroes")
+        refreshControl?.addTarget(self, action: #selector(downloadHeroes), for: .valueChanged)
     }
 }
 
