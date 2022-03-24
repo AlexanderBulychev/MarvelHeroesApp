@@ -17,12 +17,22 @@ class DescriptionViewController: UIViewController {
             }
         }
     @IBOutlet weak var heroSeries: UITableView!
+    @IBOutlet weak var isFavoriteButton: UIButton!
     
     var hero: Character!
+    private var isFavorite = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadStatusForFavoriteButton()
         setupUI()
+    }
+    
+    @IBAction func isFavoriteButtonPressed(_ sender: Any) {
+        isFavorite.toggle()
+        setStatusForFavoriteButton()
+        guard let heroName = hero.name else { return }
+        DataManager.shared.setFavoriteStatus(for: heroName, with: isFavorite)
     }
     
     private func setupUI() {
@@ -36,6 +46,17 @@ class DescriptionViewController: UIViewController {
         
         let imageLink = "\(hero.thumbnail?.path ?? "").\(hero.thumbnail?.format ?? "")"
         heroImageView.fetchImage(from: imageLink)
+        
+        setStatusForFavoriteButton()
+    }
+    
+    private func setStatusForFavoriteButton() {
+        isFavoriteButton.tintColor = isFavorite ? .systemYellow : .white
+    }
+    
+    private func loadStatusForFavoriteButton() {
+        guard let heroName = hero.name else { return }
+        isFavorite = DataManager.shared.getFavoriteStatus(for: heroName)
     }
 }
 

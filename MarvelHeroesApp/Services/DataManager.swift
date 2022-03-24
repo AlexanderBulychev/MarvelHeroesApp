@@ -2,36 +2,24 @@
 //  DataManager.swift
 //  MarvelHeroesApp
 //
-//  Created by asbul on 03.03.2022.
+//  Created by asbul on 24.03.2022.
 //
 
 import Foundation
-import CryptoKit
 
-class MarvelApi {
-    static let shared = MarvelApi()
-    var url: String {
-        "\(marvelUrl)ts=\(ts)&apikey=\(publicKey)&hash=\(hash)"
+class DataManager {
+    static let shared = DataManager()
+    
+    private let userDefaults = UserDefaults()
+    
+    private init() {}
+    
+    func setFavoriteStatus(for heroName: String, with status: Bool) {
+        userDefaults.set(status, forKey: heroName)
     }
     
-    private let marvelUrl = "https://gateway.marvel.com:443/v1/public/characters?"
-    private let publicKey = "eade1da8b900e49b57c24a9f20e69e2f"
-    private let privateKey = "ce9701f28d37990464462fdadf350f994741e442"
-    private let ts = NSDate().timeIntervalSince1970.description
-    private var hash: String {
-    (ts + privateKey + publicKey).MD5
+    func getFavoriteStatus(for heroName: String) -> Bool {
+        userDefaults.bool(forKey: heroName)
     }
-        
-    init() {}
+    
 }
-
-extension String {
-    var MD5: String {
-        return Insecure
-            .MD5
-            .hash(data: self.data(using: .utf8) ?? Data())
-            .map { String(format: "%02hhx", $0) }
-            .joined()
-    }
-}
-

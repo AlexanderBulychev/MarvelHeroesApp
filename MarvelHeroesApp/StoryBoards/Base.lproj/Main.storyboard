@@ -104,12 +104,25 @@
                                     <outlet property="delegate" destination="kCw-Dg-ArY" id="X5a-Xl-OKz"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2h-IP-TQD">
+                                <rect key="frame" x="355" y="497" width="39" height="37"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="tintColor" systemColor="systemYellowColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="star.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
+                                </state>
+                                <connections>
+                                    <action selector="isFavoriteButtonPressed:" destination="kCw-Dg-ArY" eventType="touchUpInside" id="qe0-kn-Qeh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JbN-NQ-NCq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="geB-d9-gNE" firstAttribute="top" secondItem="JbN-NQ-NCq" secondAttribute="top" constant="20" id="58a-gd-rZq"/>
                             <constraint firstItem="JbN-NQ-NCq" firstAttribute="bottom" secondItem="5l6-Tu-Hjk" secondAttribute="bottom" constant="-34" id="5Eb-E6-Qoh"/>
+                            <constraint firstItem="j2h-IP-TQD" firstAttribute="bottom" secondItem="geB-d9-gNE" secondAttribute="bottom" id="6MW-EF-KhR"/>
                             <constraint firstItem="SxN-vW-3tt" firstAttribute="centerX" secondItem="zQl-hp-3VW" secondAttribute="centerX" id="Dn9-iF-1QQ"/>
                             <constraint firstItem="SxN-vW-3tt" firstAttribute="top" secondItem="geB-d9-gNE" secondAttribute="bottom" constant="16" id="G9B-ad-6NR"/>
                             <constraint firstItem="5l6-Tu-Hjk" firstAttribute="top" secondItem="SxN-vW-3tt" secondAttribute="bottom" constant="16" id="I1b-52-y0a"/>
@@ -118,6 +131,7 @@
                             <constraint firstItem="5l6-Tu-Hjk" firstAttribute="leading" secondItem="JbN-NQ-NCq" secondAttribute="leading" id="QPr-oJ-PZ9"/>
                             <constraint firstItem="JbN-NQ-NCq" firstAttribute="trailing" secondItem="5l6-Tu-Hjk" secondAttribute="trailing" id="Rob-hz-p7y"/>
                             <constraint firstItem="geB-d9-gNE" firstAttribute="centerX" secondItem="zQl-hp-3VW" secondAttribute="centerX" id="isx-IL-0UA"/>
+                            <constraint firstItem="j2h-IP-TQD" firstAttribute="trailing" secondItem="geB-d9-gNE" secondAttribute="trailing" id="ts1-yc-nee"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Hero" id="JnB-ff-GMg"/>
@@ -125,6 +139,7 @@
                         <outlet property="heroDescriptionLabel" destination="SxN-vW-3tt" id="Z9z-zB-5UR"/>
                         <outlet property="heroImageView" destination="geB-d9-gNE" id="EVR-Wc-YvY"/>
                         <outlet property="heroSeries" destination="5l6-Tu-Hjk" id="x7l-vb-TNB"/>
+                        <outlet property="isFavoriteButton" destination="j2h-IP-TQD" id="Xb8-6K-lPU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dXT-L0-4VV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -151,8 +166,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

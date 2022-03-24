@@ -11,7 +11,8 @@
 		FC0D967027B0F23A00C8A30E /* HeroesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0D966F27B0F23A00C8A30E /* HeroesTableViewController.swift */; };
 		FC0D967227B0F27A00C8A30E /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0D967127B0F27A00C8A30E /* DescriptionViewController.swift */; };
 		FC0D967727B0F46400C8A30E /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0D967627B0F46400C8A30E /* TableViewCell.swift */; };
-		FCB0B43827D130A700E9D74F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB0B43727D130A700E9D74F /* DataManager.swift */; };
+		FC205D7E27EC9E0D00F4CE6F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC205D7D27EC9E0D00F4CE6F /* DataManager.swift */; };
+		FCB0B43827D130A700E9D74F /* APIdataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB0B43727D130A700E9D74F /* APIdataManager.swift */; };
 		FCB0B46F27EAFA7300E9D74F /* HeroImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB0B46E27EAFA7200E9D74F /* HeroImageView.swift */; };
 		FCD0E71F27AB7BF9001277A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD0E71E27AB7BF9001277A2 /* AppDelegate.swift */; };
 		FCD0E72127AB7BF9001277A2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD0E72027AB7BF9001277A2 /* SceneDelegate.swift */; };
@@ -29,8 +30,9 @@
 		FC0D966F27B0F23A00C8A30E /* HeroesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroesTableViewController.swift; sourceTree = "<group>"; };
 		FC0D967127B0F27A00C8A30E /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		FC0D967627B0F46400C8A30E /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		FC205D7D27EC9E0D00F4CE6F /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FCB0B43627D1251A00E9D74F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = MarvelHeroesApp/README.md; sourceTree = SOURCE_ROOT; };
-		FCB0B43727D130A700E9D74F /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		FCB0B43727D130A700E9D74F /* APIdataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIdataManager.swift; sourceTree = "<group>"; };
 		FCB0B46E27EAFA7200E9D74F /* HeroImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroImageView.swift; sourceTree = "<group>"; };
 		FCD0E71B27AB7BF9001277A2 /* MarvelHeroesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelHeroesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD0E71E27AB7BF9001277A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -162,7 +164,8 @@
 			isa = PBXGroup;
 			children = (
 				FCD0E73527ABD65A001277A2 /* NetworkManager.swift */,
-				FCB0B43727D130A700E9D74F /* DataManager.swift */,
+				FCB0B43727D130A700E9D74F /* APIdataManager.swift */,
+				FC205D7D27EC9E0D00F4CE6F /* DataManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -283,7 +286,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC0D967727B0F46400C8A30E /* TableViewCell.swift in Sources */,
-				FCB0B43827D130A700E9D74F /* DataManager.swift in Sources */,
+				FC205D7E27EC9E0D00F4CE6F /* DataManager.swift in Sources */,
+				FCB0B43827D130A700E9D74F /* APIdataManager.swift in Sources */,
 				FC0D967227B0F27A00C8A30E /* DescriptionViewController.swift in Sources */,
 				FCD0E73327AB7C2A001277A2 /* Heroes.swift in Sources */,
 				FCD0E73627ABD65A001277A2 /* NetworkManager.swift in Sources */,
