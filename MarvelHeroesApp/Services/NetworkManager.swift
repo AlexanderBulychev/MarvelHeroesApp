@@ -71,7 +71,18 @@ class NetworkManager {
             }
         }
     }
-
+    
+    func fetchDataForImageViewClass(from url: URL, completion: @escaping(Data, URLResponse) -> Void) {
+        AF.request(url)
+            .validate()
+            .response { dataResponse in
+                guard let data = dataResponse.data, let response = dataResponse.response else {
+                    print(dataResponse.error ?? "No error")
+                    return
+                }
+                completion(data, response)
+            }
+    }
+    
 }
-
 

@@ -6,12 +6,11 @@
 //
 
 import UIKit
-import AlamofireImage
 
 class DescriptionViewController: UIViewController {
 
     @IBOutlet weak var heroDescriptionLabel: UILabel!
-    @IBOutlet weak var heroImageView: UIImageView! {
+    @IBOutlet weak var heroImageView: HeroImageView! {
         didSet {
             heroImageView.contentMode = .scaleAspectFill
             heroImageView.layer.cornerRadius = 15
@@ -36,8 +35,7 @@ class DescriptionViewController: UIViewController {
         }
         
         let imageLink = "\(hero.thumbnail?.path ?? "").\(hero.thumbnail?.format ?? "")"
-        guard let imageURL = URL(string: imageLink) else { return }
-        heroImageView.af.setImage(withURL: imageURL)
+        heroImageView.fetchImage(from: imageLink)
     }
 }
 

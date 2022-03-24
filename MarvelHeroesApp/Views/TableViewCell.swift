@@ -6,12 +6,11 @@
 //
 
 import UIKit
-import AlamofireImage
 
 class TableViewCell: UITableViewCell {
     
     @IBOutlet var heroName: UILabel!
-    @IBOutlet weak var heroImageView: UIImageView! {
+    @IBOutlet weak var heroImageView: HeroImageView! {
         didSet {
             heroImageView.contentMode = .scaleAspectFill
             heroImageView.clipsToBounds = true
@@ -30,7 +29,6 @@ class TableViewCell: UITableViewCell {
         heroName.text = hero.name
         
         let imageLink = "\(hero.thumbnail?.path ?? "").\(hero.thumbnail?.format ?? "")"
-        guard let imageURL = URL(string: imageLink) else { return }
-        heroImageView.af.setImage(withURL: imageURL)
+        heroImageView.fetchImage(from: imageLink)
     }
 }

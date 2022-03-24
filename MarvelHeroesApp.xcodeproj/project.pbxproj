@@ -12,6 +12,7 @@
 		FC0D967227B0F27A00C8A30E /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0D967127B0F27A00C8A30E /* DescriptionViewController.swift */; };
 		FC0D967727B0F46400C8A30E /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0D967627B0F46400C8A30E /* TableViewCell.swift */; };
 		FCB0B43827D130A700E9D74F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB0B43727D130A700E9D74F /* DataManager.swift */; };
+		FCB0B46F27EAFA7300E9D74F /* HeroImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB0B46E27EAFA7200E9D74F /* HeroImageView.swift */; };
 		FCD0E71F27AB7BF9001277A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD0E71E27AB7BF9001277A2 /* AppDelegate.swift */; };
 		FCD0E72127AB7BF9001277A2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD0E72027AB7BF9001277A2 /* SceneDelegate.swift */; };
 		FCD0E72627AB7BF9001277A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD0E72427AB7BF9001277A2 /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 		FC0D967627B0F46400C8A30E /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		FCB0B43627D1251A00E9D74F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = MarvelHeroesApp/README.md; sourceTree = SOURCE_ROOT; };
 		FCB0B43727D130A700E9D74F /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		FCB0B46E27EAFA7200E9D74F /* HeroImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroImageView.swift; sourceTree = "<group>"; };
 		FCD0E71B27AB7BF9001277A2 /* MarvelHeroesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelHeroesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD0E71E27AB7BF9001277A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCD0E72027AB7BF9001277A2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,7 +61,6 @@
 				AA412CCE9378ABC51F1F2F44 /* Pods-MarvelHeroesApp.debug.xcconfig */,
 				E812CC8D959962F65C9776D3 /* Pods-MarvelHeroesApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -84,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				FC0D967627B0F46400C8A30E /* TableViewCell.swift */,
+				FCB0B46E27EAFA7200E9D74F /* HeroImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -288,6 +290,7 @@
 				FCD0E71F27AB7BF9001277A2 /* AppDelegate.swift in Sources */,
 				FCD0E72127AB7BF9001277A2 /* SceneDelegate.swift in Sources */,
 				FC0D967027B0F23A00C8A30E /* HeroesTableViewController.swift in Sources */,
+				FCB0B46F27EAFA7300E9D74F /* HeroImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
